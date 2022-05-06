@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="logo_margin_top">200dp</dimen>
+    <dimen name="title_font_size">48sp</dimen>
+    <dimen name="title_font_size_small">36sp</dimen>
+    <dimen name="button_margin">18dp</dimen>
+    <dimen name="button_drawable_padding_left">10dp</dimen>
+    <dimen name="button_drawable_padding_right">20dp</dimen>
+    <dimen name="button_height">70dp</dimen>
+    <dimen name="replay_button_height">65dp</dimen>
+    <dimen name="button_border_radius">8dp</dimen>
+    <dimen name="home_text_size">20sp</dimen>
+    <dimen name="home_text_margin_bottom">40dp</dimen>
+    <dimen name="replay_text_size">24sp</dimen>
+    <dimen name="button_margin_bottom">28dp</dimen>
+    <dimen name="congratulations_text_size">40sp</dimen>
+    <dimen name="congratulations_text_margin">100dp</dimen>
+    <dimen name="congratulations_text_margin_small">100dp</dimen>
+    <dimen name="score_text_size">24sp</dimen>
+    <dimen name="medal_margin_top">20dp</dimen>
+    <dimen name="profile_margin_top">15dp</dimen>
+    <dimen name="card_height">270dp</dimen>
+    <dimen name="profile_img">80dp</dimen>
+    <dimen name="count_text_size">18sp</dimen>
+    <dimen name="count_text_margin">20dp</dimen>
+    <dimen name="guideline_margin">16dp</dimen>
+    <dimen name="question_text_margin_top">30dp</dimen>
+    <dimen name="recycler_margin">40dp</dimen>
+    <dimen name="card_item_margin">10dp</dimen>
+    <dimen name="last_time_margin">15dp</dimen>
+    <dimen name="smile">250dp</dimen>
+
+
+
+</resources>
