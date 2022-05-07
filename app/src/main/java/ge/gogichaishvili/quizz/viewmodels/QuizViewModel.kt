@@ -12,8 +12,8 @@ import kotlinx.coroutines.*
 
 class QuizViewModel : ViewModel() {
 
-    private var WRONG_ANSWERS_LIMIT = 3
-    private var EXAM_TIME_LIMIT_IN_SECONDS = 30L
+    private var WRONG_ANSWERS_LIMIT = 3  //კარგი დამატებითი ლოგიკაა
+    private var EXAM_TIME_LIMIT_IN_SECONDS = 30L //ცოტაა :))
 
     private val _currentQuestionLiveData = MutableLiveData<Question?>()
     val currentQuestionLiveData: LiveData<Question?> get() = _currentQuestionLiveData

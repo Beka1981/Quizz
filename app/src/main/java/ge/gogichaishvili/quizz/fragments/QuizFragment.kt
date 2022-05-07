@@ -24,8 +24,8 @@ class QuizFragment : Fragment() {
 
     private lateinit var adapter: QuizAdapter
 
-    private var start : Long? = null
-    private var end : Long? = null
+    private var start: Long? = null
+    private var end: Long? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,8 +39,8 @@ class QuizFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.startQuiz()
-        start = System.currentTimeMillis()
+        viewModel.startQuiz() //ეს პირდაპირ viewModel ის ინიტში შეგიძლია გამოიძახო
+        start = System.currentTimeMillis() //ვიუმოდელის საქმეა უფრო ამის დათვლა
 
         viewModel.currentQuestionLiveData.observe(viewLifecycleOwner) { question ->
             binding.tvQuestion.text = question?.question.toString()
@@ -48,21 +48,25 @@ class QuizFragment : Fragment() {
 
             binding.rvAnswersRecyclerView.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            adapter = QuizAdapter()
+            adapter =
+                QuizAdapter() // ეს ყოველ შემოსვლაზე დაესეტებაა ხელახლა overhead არის, ერთხელ დაუსეტე observe-ის გარეთ
             adapter.setData(question!!.answers)
             binding.rvAnswersRecyclerView.adapter = adapter.apply {
                 setOnItemCLickListener { answer ->
                     if (answer.id == question.rightAnswer) {
-                        viewModel.onRightAnswerClicked()
+                        viewModel.onRightAnswerClicked() /*1 ) სამი სხვადასხვა ქოლია ვიუმოდელზე
+                         ამ სამის ერთში გატანა შეიძლებოდა და ვიუმოდელში გარჩევა იმის თუ არასწორი იყო თუ არა პასუხი
+                         შემდეგ რესაიქლერვიუს დააფდეითება შესაბამისად
+                        */
                         Tools.playSound(requireContext(), R.raw.success)
                     } else {
-                        viewModel.onWrongAnswerClicked()
+                        viewModel.onWrongAnswerClicked() //2)
                         Tools.playSound(requireContext(), R.raw.los)
                     }
-                    answer.shouldUpdateUi = true
+                    answer.shouldUpdateUi = true //ამ ცვლადს სხვა სახელს დავარქმევდი
                     adapter.disableClicks()
                     adapter.updateAll(question.answers)
-                    viewModel.onAnswerSelected()
+                    viewModel.onAnswerSelected() // 3)
                 }
             }
 
@@ -90,12 +94,14 @@ class QuizFragment : Fragment() {
 
         viewModel.finalExamResult.observe(viewLifecycleOwner) {
             val percent = viewModel.getScore().toString()
-            end = System.currentTimeMillis() - start!!
+            end = System.currentTimeMillis() - start!! //ვიუმოდელის საქმეა ესეც
             when (it) {
                 FinalQuizResult.SUCCESS -> {
-                    val resultFragment = ResultFragment.newInstance(percent, Tools.millisecondsConverter(
-                        end!!
-                    ))
+                    val resultFragment = ResultFragment.newInstance(
+                        percent, Tools.millisecondsConverter(
+                            end!!
+                        )
+                    )
                     parentFragmentManager.beginTransaction().apply {
                         replace(R.id.fragmentContainerView, resultFragment)
                         addToBackStack(resultFragment::javaClass.name)

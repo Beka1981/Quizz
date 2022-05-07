@@ -25,7 +25,7 @@ class ResultFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        arguments?.getString("PERCENT")?.let {
+        arguments?.getString("PERCENT")?.let { // const val ად უნდა გაიტანო key
             percent = it
         }
         arguments?.getString("TIME")?.let {
